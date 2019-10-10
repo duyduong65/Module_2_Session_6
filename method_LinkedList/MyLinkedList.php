@@ -7,16 +7,17 @@ class MyLinkedList
     public $lastNode;
     public $numNodes;
 
-    function MyLinkedList()
+    public function __construct()
     {
         $this->fistNode = NULL;
         $this->lastNode = NULL;
         $this->numNodes = 0;
     }
 
+
     function addFirst($data)
     {
-        $node = new Nodes();
+        $node = new Node($data);
         $node->link = $this->fistNode;
         $this->fistNode = $node;
         if (!$this->lastNode) {
@@ -28,7 +29,7 @@ class MyLinkedList
     function addLastNode($data)
     {
         if ($this->fistNode) {
-            $node = new Nodes();
+            $node = new Node($data);
             $this->lastNode->link = $node;
             $node->link = NULL;
             $this->lastNode = $node;
@@ -38,8 +39,39 @@ class MyLinkedList
         }
     }
 
-    function size(){
+    function size()
+    {
         return $this->numNodes;
+    }
+
+    function add($index, $element)
+    {
+        $node = new Node($element);
+        $current = $this->fistNode;
+
+        if ($index > 0 && $index < $this->size()) {
+
+            for ($i = 1; $i < $index; $i++) {
+                $current = $current->link;
+                $behind = $current->link;
+            }
+            $current->link = $node;
+            $node->link = $behind;
+
+
+
+        }
+    }
+
+    function showList()
+    {
+        $list = [];
+        $current = $this->fistNode;
+        while ($this->lastNode) {
+            array_push($list, $current->getData());
+            $current = $current->link;
+        }
+        return $list;
     }
 
 }
