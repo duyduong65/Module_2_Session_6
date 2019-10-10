@@ -46,20 +46,22 @@ class MyLinkedList
 
     function add($index, $element)
     {
-        $node = new Node($element);
-        $current = $this->fistNode;
+        if ($index <= 1) {
+            $this->addFirst($element);
+        } else if ($index >= $this->size()) {
+            $this->addLastNode($element);
+        } else {
+            $node = new Node($element);
+            $current = $this->fistNode;
 
-        if ($index > 0 && $index < $this->size()) {
-
-            for ($i = 1; $i < $index; $i++) {
-                $current = $current->link;
-                $behind = $current->link;
+            if ($index > 0 && $index < $this->size()) {
+                for ($i = 1; $i < $index; $i++) {
+                    $current = $current->link;
+                    $behind = $current->link;
+                }
+                $current->link = $node;
+                $node->link = $behind;
             }
-            $current->link = $node;
-            $node->link = $behind;
-
-
-
         }
     }
 
