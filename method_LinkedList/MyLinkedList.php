@@ -65,6 +65,21 @@ class MyLinkedList
         }
     }
 
+    function remove($index)
+    {
+        $previous = $this->fistNode;
+        $current = $this->fistNode;
+        $behind = $this->fistNode;
+        if ($index > 0 && $index < $this->size()) {
+            for ($i = 1; $i < $index; $i++) {
+                $previous = $previous->link;
+                $current = $previous->link;
+                $behind = $current->link;
+            }
+            return $previous->link = $behind;
+        }
+    }
+
     function showList()
     {
         $list = [];
